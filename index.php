@@ -58,7 +58,7 @@ $movies = [
 
 ?>
 <div class="row mt-5">
-    <?php foreach ($movies as $index => $movie) { ?>
+    <?php foreach ($movies as $movie) { ?>
         <div class="col-md-3">
             <div class="movie<?php echo $index ?> text-center bg-dark text-light rounded shadow ">
                 <h3><?php echo $movie->getTitle() ?></h3>
