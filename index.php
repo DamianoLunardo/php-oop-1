@@ -41,7 +41,29 @@ class Production {
     function getRating() {
         return $this->rating;
     }
+
+    function setTitle($title) {
+        $this->title = $title;
+    }
+
+    function setLanguage($language) {
+        $this->language = $language;
+    }
+
+    function setRating($rating) {
+        $this->rating = $rating;
+    }
 }
+
+$movie1 = new Production('', '' , '');
+$movie1->setTitle('Ciao');
+$movie1->setLanguage('italiano');
+$movie1->setRating(8);
+
+echo $movie1->getTitle(); 
+echo $movie1->getLanguage(); 
+echo $movie1->getRating(); 
+
 
 $movie1 = new Production ('Harry Potter', 'English', 10);
 //echo 'Film: ' . $movie1->getTitle(). $movie1->getLanguage(). $movie1->getRating(). '<br>';
