@@ -45,32 +45,34 @@ $movies_series = [
     $serie5,
 ];
 
-foreach ($movies_series as $production) {
-    ?>
-    <div class="col-4">
-        <div class="production text-center bg-dark text-light rounded shadow">
-            <h3><?php echo $production->getTitle() ?></h3>
-            <p><?php echo $production->getLanguage() ?></p>
-            <p>Rating: <?php echo $production->getRating() ?></p>
-            <?php
-            // instanceof serve quando devo verificare che un oggetto è un istanza in una classe 
-            // in questo modo riesco a gestire le diverse propietà di un oggetto
-            if ($production instanceof Movie) {
-                ?>
-                <p>Profit: <?php echo $production->getProfit() ?> €</p>
-                <p>Duration: <?php echo $production->getDuration() ?> minutes</p>
-                <?php
-            } elseif ($production instanceof Serie) {
-                ?>
-                <p>Seasons: <?php echo $production->getSeason() ?></p>
-                <?php
-            }
-            ?>
-        </div>
-    </div>
-    <?php
-}
 ?>
+<table class="table table-striped table-hover table-dark text-center ">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Language</th>
+            <th>Rating</th>
+            <th>Profit/Seasons</th>
+            <th>Duration/-</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($movies_series as $production) { ?>
+            <tr>
+                <td><?php echo $production->getTitle() ?></td>
+                <td><?php echo $production->getLanguage() ?></td>
+                <td><?php echo $production->getRating() ?></td>
+                <?php if ($production instanceof Movie) { ?>
+                    <td><?php echo $production->getProfit() ?> €</td>
+                    <td><?php echo $production->getDuration() ?> minutes</td>
+                <?php } elseif ($production instanceof Serie) { ?>
+                    <td><?php echo $production->getSeason() ?></td>
+                    <td>-</td>
+                <?php } ?>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
 
 
 
