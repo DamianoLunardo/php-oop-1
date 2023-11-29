@@ -11,85 +11,71 @@
         border: 1px solid black;
         }
 </style>
-
 <body>
 </body>
 </html>
 
-
 <?php
 
-class Production {
-    public $title;
-    public $language;
-    public $rating;
+require_once __DIR__  . '/Models/Movie.php';
+require_once __DIR__  . '/Models/Serie.php';
 
-    function __construct($title, $language, $rating) {
-        $this->title = $title;
-        $this->language = $language;
-        $this->rating = $rating;
-    }
+$movie1 = new Movie('Harry Potter', 'English', 10, 500000000, 152);
+$movie2 = new Movie('Avengers Endgame', 'English', 10, 1200000000, 180);
+$movie3 = new Movie('The Dark Knight', 'English', 9, 1000000000, 152);
+$movie4 = new Movie('Avengers Infinity War', 'English', 10, 1000000000, 180);
+$movie5 = new Movie('The Matrix', 'English', 10, 800000000, 136);
 
-    function getTitle() {
-        return $this->title;
-    }
+$serie1 = new Serie('Stranger Things', 'English', 9, 3);
+$serie2 = new Serie('Game of Thrones', 'English', 9.5, 8);
+$serie3 = new Serie('Breaking Bad', 'English', 9, 5);
+$serie4 = new Serie('The Walking Dead', 'English', 9, 5);
+$serie5 = new Serie('The Flash', 'English', 9, 5);
 
-    function getLanguage() {
-        return $this->language;
-    }
-
-    function getRating() {
-        return $this->rating;
-    }
-
-    function setTitle($title) {
-        $this->title = $title;
-    }
-
-    function setLanguage($language) {
-        $this->language = $language;
-    }
-
-    function setRating($rating) {
-        $this->rating = $rating;
-    }
-}
-
-$movie1 = new Production('', '' , '');
-$movie1->setTitle('Ciao');
-$movie1->setLanguage('italiano');
-$movie1->setRating(8);
-
-echo $movie1->getTitle(); 
-echo $movie1->getLanguage(); 
-echo $movie1->getRating(); 
-
-
-$movie1 = new Production ('Harry Potter', 'English', 10);
-//echo 'Film: ' . $movie1->getTitle(). $movie1->getLanguage(). $movie1->getRating(). '<br>';
-
-$movie2 = new Production ('Avengers Endgame', 'English', 10);
-//echo 'Film: ' . $movie2->getTitle(). $movie2->getLanguage(). $movie2->getRating();  
-
-$movies = [
+$movies_series = [
     $movie1,
     $movie2,
-    $movie1,
-    $movie2,
+    $movie3,
+    $movie4,
+    $movie5,
+    $serie1,
+    $serie2,
+    $serie3,
+    $serie4,
+    $serie5,
 ];
 
-?>
-<div class="row mt-5">
-    <?php foreach ($movies as $movie) { ?>
-        <div class="col-md-3">
-            <div class="movie<?php echo $index ?> text-center bg-dark text-light rounded shadow ">
-                <h3><?php echo $movie->getTitle() ?></h3>
-                <p><?php echo $movie->getLanguage() ?></p>
-                <p><?php echo $movie->getRating() ?></p>
-            </div>
+foreach ($movies_series as $production) {
+    ?>
+    <div class="col-4">
+        <div class="production text-center bg-dark text-light rounded shadow">
+            <h3><?php echo $production->getTitle() ?></h3>
+            <p><?php echo $production->getLanguage() ?></p>
+            <p>Rating: <?php echo $production->getRating() ?></p>
+            <?php
+            // instanceof serve quando devo verificare che un oggetto è un istanza in una classe 
+            // in questo modo riesco a gestire le diverse propietà di un oggetto
+            if ($production instanceof Movie) {
+                ?>
+                <p>Profit: <?php echo $production->getProfit() ?> €</p>
+                <p>Duration: <?php echo $production->getDuration() ?> minutes</p>
+                <?php
+            } elseif ($production instanceof Serie) {
+                ?>
+                <p>Seasons: <?php echo $production->getSeason() ?></p>
+                <?php
+            }
+            ?>
         </div>
-    <?php } ?>
-</div>
+    </div>
+    <?php
+}
+?>
+
+
+
+
+
 
 
 
